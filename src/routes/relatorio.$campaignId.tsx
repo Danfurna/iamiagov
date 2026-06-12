@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   getCampaign, listOrganizations, listRespondents, listResponsesForCampaign,
 } from "@/lib/api";
-import { DIMENSIONS } from "@/lib/assessment";
 import {
   aggregate, buildActionPlan, consensusClass, fmt,
 } from "@/lib/analytics";
@@ -200,5 +199,3 @@ function Stat({ label, value, color }: { label: string; value: string; color?: s
   );
 }
 
-// usado apenas para evitar import não utilizado quando todas dimensões aparecem
-export const _DIMS = DIMENSIONS.length;

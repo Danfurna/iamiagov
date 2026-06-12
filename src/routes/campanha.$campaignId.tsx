@@ -172,7 +172,7 @@ function RespondentsTab({ campaignId, shareToken, respondents }: {
   );
 }
 
-function ConfigTab({ campaign, onSaved }: { campaign: ReturnType<typeof getCampaign> extends Promise<infer T> ? T : never; onSaved: () => void }) {
+function ConfigTab({ campaign, onSaved }: { campaign: Campaign; onSaved: () => void }) {
   const [status, setStatus] = useState(campaign.status);
   const [method, setMethod] = useState(campaign.calc_method);
   const [weights, setWeights] = useState<Record<string, number>>(

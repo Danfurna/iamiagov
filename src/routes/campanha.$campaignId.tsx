@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import {
   getCampaign, listOrganizations, listRespondents, listResponsesForCampaign,
-  createRespondent, deleteRespondent, updateCampaign, shareLink, type Respondent,
+  createRespondent, deleteRespondent, updateCampaign, shareLink, type Respondent, type Campaign,
 } from "@/lib/api";
 import { CAMPAIGN_STATUS, DIMENSIONS, EQUAL_WEIGHT, RESPONDENT_PROFILES } from "@/lib/assessment";
 import { CampaignAnalysis } from "@/components/CampaignAnalysis";

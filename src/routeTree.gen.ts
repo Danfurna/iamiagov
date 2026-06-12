@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as OrganizacoesRouteImport } from './routes/organizacoes'
 import { Route as MetodologiaRouteImport } from './routes/metodologia'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
@@ -16,6 +17,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResponderTokenRouteImport } from './routes/responder.$token'
 import { Route as CampanhaCampaignIdRouteImport } from './routes/campanha.$campaignId'
 
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrganizacoesRoute = OrganizacoesRouteImport.update({
   id: '/organizacoes',
   path: '/organizacoes',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/campanhas': typeof CampanhasRoute
   '/metodologia': typeof MetodologiaRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/sobre': typeof SobreRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
   '/responder/$token': typeof ResponderTokenRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/campanhas': typeof CampanhasRoute
   '/metodologia': typeof MetodologiaRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/sobre': typeof SobreRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
   '/responder/$token': typeof ResponderTokenRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/campanhas': typeof CampanhasRoute
   '/metodologia': typeof MetodologiaRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/sobre': typeof SobreRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
   '/responder/$token': typeof ResponderTokenRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/campanhas'
     | '/metodologia'
     | '/organizacoes'
+    | '/sobre'
     | '/campanha/$campaignId'
     | '/responder/$token'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/campanhas'
     | '/metodologia'
     | '/organizacoes'
+    | '/sobre'
     | '/campanha/$campaignId'
     | '/responder/$token'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/campanhas'
     | '/metodologia'
     | '/organizacoes'
+    | '/sobre'
     | '/campanha/$campaignId'
     | '/responder/$token'
   fileRoutesById: FileRoutesById
@@ -104,12 +116,20 @@ export interface RootRouteChildren {
   CampanhasRoute: typeof CampanhasRoute
   MetodologiaRoute: typeof MetodologiaRoute
   OrganizacoesRoute: typeof OrganizacoesRoute
+  SobreRoute: typeof SobreRoute
   CampanhaCampaignIdRoute: typeof CampanhaCampaignIdRoute
   ResponderTokenRoute: typeof ResponderTokenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/organizacoes': {
       id: '/organizacoes'
       path: '/organizacoes'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   CampanhasRoute: CampanhasRoute,
   MetodologiaRoute: MetodologiaRoute,
   OrganizacoesRoute: OrganizacoesRoute,
+  SobreRoute: SobreRoute,
   CampanhaCampaignIdRoute: CampanhaCampaignIdRoute,
   ResponderTokenRoute: ResponderTokenRoute,
 }

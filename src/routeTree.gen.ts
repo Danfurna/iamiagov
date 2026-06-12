@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as OrganizacoesRouteImport } from './routes/organizacoes'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResponderTokenRouteImport } from './routes/responder.$token'
 import { Route as CampanhaCampaignIdRouteImport } from './routes/campanha.$campaignId'
 
 const OrganizacoesRoute = OrganizacoesRouteImport.update({
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResponderTokenRoute = ResponderTokenRouteImport.update({
+  id: '/responder/$token',
+  path: '/responder/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CampanhaCampaignIdRoute = CampanhaCampaignIdRouteImport.update({
   id: '/campanha/$campaignId',
   path: '/campanha/$campaignId',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/campanhas': typeof CampanhasRoute
   '/organizacoes': typeof OrganizacoesRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
+  '/responder/$token': typeof ResponderTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
   '/organizacoes': typeof OrganizacoesRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
+  '/responder/$token': typeof ResponderTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,18 +61,30 @@ export interface FileRoutesById {
   '/campanhas': typeof CampanhasRoute
   '/organizacoes': typeof OrganizacoesRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
+  '/responder/$token': typeof ResponderTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/campanhas' | '/organizacoes' | '/campanha/$campaignId'
+  fullPaths:
+    | '/'
+    | '/campanhas'
+    | '/organizacoes'
+    | '/campanha/$campaignId'
+    | '/responder/$token'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/campanhas' | '/organizacoes' | '/campanha/$campaignId'
+  to:
+    | '/'
+    | '/campanhas'
+    | '/organizacoes'
+    | '/campanha/$campaignId'
+    | '/responder/$token'
   id:
     | '__root__'
     | '/'
     | '/campanhas'
     | '/organizacoes'
     | '/campanha/$campaignId'
+    | '/responder/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -72,6 +92,7 @@ export interface RootRouteChildren {
   CampanhasRoute: typeof CampanhasRoute
   OrganizacoesRoute: typeof OrganizacoesRoute
   CampanhaCampaignIdRoute: typeof CampanhaCampaignIdRoute
+  ResponderTokenRoute: typeof ResponderTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -97,6 +118,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/responder/$token': {
+      id: '/responder/$token'
+      path: '/responder/$token'
+      fullPath: '/responder/$token'
+      preLoaderRoute: typeof ResponderTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/campanha/$campaignId': {
       id: '/campanha/$campaignId'
       path: '/campanha/$campaignId'
@@ -112,7 +140,18 @@ const rootRouteChildren: RootRouteChildren = {
   CampanhasRoute: CampanhasRoute,
   OrganizacoesRoute: OrganizacoesRoute,
   CampanhaCampaignIdRoute: CampanhaCampaignIdRoute,
+  ResponderTokenRoute: ResponderTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

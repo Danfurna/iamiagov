@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as OrganizacoesRouteImport } from './routes/organizacoes'
 import { Route as MetodologiaRouteImport } from './routes/metodologia'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
@@ -21,6 +22,11 @@ import { Route as CampanhaCampaignIdRouteImport } from './routes/campanha.$campa
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrganizacoesRoute = OrganizacoesRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/campanhas': typeof CampanhasRoute
   '/metodologia': typeof MetodologiaRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
   '/relatorio/$campaignId': typeof RelatorioCampaignIdRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/campanhas': typeof CampanhasRoute
   '/metodologia': typeof MetodologiaRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
   '/relatorio/$campaignId': typeof RelatorioCampaignIdRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/campanhas': typeof CampanhasRoute
   '/metodologia': typeof MetodologiaRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
   '/relatorio/$campaignId': typeof RelatorioCampaignIdRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/campanhas'
     | '/metodologia'
     | '/organizacoes'
+    | '/sitemap.xml'
     | '/sobre'
     | '/campanha/$campaignId'
     | '/relatorio/$campaignId'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/campanhas'
     | '/metodologia'
     | '/organizacoes'
+    | '/sitemap.xml'
     | '/sobre'
     | '/campanha/$campaignId'
     | '/relatorio/$campaignId'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/campanhas'
     | '/metodologia'
     | '/organizacoes'
+    | '/sitemap.xml'
     | '/sobre'
     | '/campanha/$campaignId'
     | '/relatorio/$campaignId'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   CampanhasRoute: typeof CampanhasRoute
   MetodologiaRoute: typeof MetodologiaRoute
   OrganizacoesRoute: typeof OrganizacoesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   CampanhaCampaignIdRoute: typeof CampanhaCampaignIdRoute
   RelatorioCampaignIdRoute: typeof RelatorioCampaignIdRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre'
       fullPath: '/sobre'
       preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/organizacoes': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   CampanhasRoute: CampanhasRoute,
   MetodologiaRoute: MetodologiaRoute,
   OrganizacoesRoute: OrganizacoesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   CampanhaCampaignIdRoute: CampanhaCampaignIdRoute,
   RelatorioCampaignIdRoute: RelatorioCampaignIdRoute,
@@ -208,3 +229,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as OrganizacoesRouteImport } from './routes/organizacoes'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CampanhaCampaignIdRouteImport } from './routes/campanha.$campaignId'
 
 const OrganizacoesRoute = OrganizacoesRouteImport.update({
   id: '/organizacoes',
@@ -28,35 +29,49 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CampanhaCampaignIdRoute = CampanhaCampaignIdRouteImport.update({
+  id: '/campanha/$campaignId',
+  path: '/campanha/$campaignId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
   '/organizacoes': typeof OrganizacoesRoute
+  '/campanha/$campaignId': typeof CampanhaCampaignIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/campanhas' | '/organizacoes'
+  fullPaths: '/' | '/campanhas' | '/organizacoes' | '/campanha/$campaignId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/campanhas' | '/organizacoes'
-  id: '__root__' | '/' | '/campanhas' | '/organizacoes'
+  to: '/' | '/campanhas' | '/organizacoes' | '/campanha/$campaignId'
+  id:
+    | '__root__'
+    | '/'
+    | '/campanhas'
+    | '/organizacoes'
+    | '/campanha/$campaignId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CampanhasRoute: typeof CampanhasRoute
   OrganizacoesRoute: typeof OrganizacoesRoute
+  CampanhaCampaignIdRoute: typeof CampanhaCampaignIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +97,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/campanha/$campaignId': {
+      id: '/campanha/$campaignId'
+      path: '/campanha/$campaignId'
+      fullPath: '/campanha/$campaignId'
+      preLoaderRoute: typeof CampanhaCampaignIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,7 +111,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CampanhasRoute: CampanhasRoute,
   OrganizacoesRoute: OrganizacoesRoute,
+  CampanhaCampaignIdRoute: CampanhaCampaignIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

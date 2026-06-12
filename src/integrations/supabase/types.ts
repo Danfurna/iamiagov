@@ -14,7 +14,226 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      campaign_results: {
+        Row: {
+          campaign_id: string
+          consensus_index: number | null
+          created_at: string
+          id: string
+          overall_maturity_level: number | null
+          overall_score: number | null
+          total_respondents: number | null
+        }
+        Insert: {
+          campaign_id: string
+          consensus_index?: number | null
+          created_at?: string
+          id?: string
+          overall_maturity_level?: number | null
+          overall_score?: number | null
+          total_respondents?: number | null
+        }
+        Update: {
+          campaign_id?: string
+          consensus_index?: number | null
+          created_at?: string
+          id?: string
+          overall_maturity_level?: number | null
+          overall_score?: number | null
+          total_respondents?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaign_results_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campaigns: {
+        Row: {
+          calc_method: string
+          created_at: string
+          description: string | null
+          end_date: string | null
+          id: string
+          name: string
+          organization_id: string
+          share_token: string
+          start_date: string | null
+          status: string
+          weights: Json | null
+        }
+        Insert: {
+          calc_method?: string
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          name: string
+          organization_id: string
+          share_token?: string
+          start_date?: string | null
+          status?: string
+          weights?: Json | null
+        }
+        Update: {
+          calc_method?: string
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          name?: string
+          organization_id?: string
+          share_token?: string
+          start_date?: string | null
+          status?: string
+          weights?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaigns_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      evidences: {
+        Row: {
+          created_at: string
+          dimension_key: string
+          evidence_text: string | null
+          id: string
+          respondent_id: string
+        }
+        Insert: {
+          created_at?: string
+          dimension_key: string
+          evidence_text?: string | null
+          id?: string
+          respondent_id: string
+        }
+        Update: {
+          created_at?: string
+          dimension_key?: string
+          evidence_text?: string | null
+          id?: string
+          respondent_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evidences_respondent_id_fkey"
+            columns: ["respondent_id"]
+            isOneToOne: false
+            referencedRelation: "respondents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          parent_body: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          parent_body?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          parent_body?: string | null
+        }
+        Relationships: []
+      }
+      respondents: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          email: string | null
+          id: string
+          job_title: string | null
+          name: string
+          organizational_unit: string | null
+          respondent_profile: string | null
+          submitted: boolean
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          job_title?: string | null
+          name: string
+          organizational_unit?: string | null
+          respondent_profile?: string | null
+          submitted?: boolean
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          job_title?: string | null
+          name?: string
+          organizational_unit?: string | null
+          respondent_profile?: string | null
+          submitted?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "respondents_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      responses: {
+        Row: {
+          created_at: string
+          dimension_key: string
+          id: string
+          question_key: string
+          respondent_id: string
+          score: number
+        }
+        Insert: {
+          created_at?: string
+          dimension_key: string
+          id?: string
+          question_key: string
+          respondent_id: string
+          score: number
+        }
+        Update: {
+          created_at?: string
+          dimension_key?: string
+          id?: string
+          question_key?: string
+          respondent_id?: string
+          score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "responses_respondent_id_fkey"
+            columns: ["respondent_id"]
+            isOneToOne: false
+            referencedRelation: "respondents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -51,7 +51,7 @@ function Index() {
           </h1>
           <p className="mt-4 text-lg text-primary-foreground/90 sm:text-xl">
             Instrumento de Avaliação da Maturidade Institucional em Inteligência Artificial
-            para Organizações Públicas.
+            para Governos.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" variant="success">

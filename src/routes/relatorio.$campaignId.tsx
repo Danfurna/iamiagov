@@ -54,7 +54,7 @@ function Relatorio() {
         <header className="border-b pb-6">
           <div className="flex items-center gap-2 text-primary">
             <BrainCircuit className="h-6 w-6" />
-            <span className="font-display text-lg font-bold">IA-MIA GOV</span>
+            <span className="font-display text-lg font-bold">IAMIA-GOV</span>
           </div>
           <h1 className="mt-4 text-3xl font-bold">Relatório Executivo de Maturidade em IA</h1>
           <p className="mt-1 text-muted-foreground">Instrumento de Avaliação da Maturidade Institucional em Inteligência Artificial</p>
@@ -177,7 +177,7 @@ function Relatorio() {
         )}
 
         <footer className="border-t pt-4 text-xs text-muted-foreground">
-          Gerado em {new Date().toLocaleString("pt-BR")} · IA-MIA GOV v2.0
+          Gerado em {new Date().toLocaleString("pt-BR")} · IAMIA-GOV v2.0
         </footer>
       </article>
     </div>

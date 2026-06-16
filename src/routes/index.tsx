@@ -13,7 +13,7 @@ import { MATURITY_LEVELS } from "@/lib/analytics";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "IA-MIA GOV — Maturidade Institucional em IA" },
+      { title: "IAMIA-GOV — Maturidade Institucional em IA" },
       { name: "description", content: "Avalie a capacidade da sua organização pública de planejar, implementar e governar Inteligência Artificial de forma responsável." },
     ],
   }),
@@ -47,7 +47,7 @@ function Index() {
             <BrainCircuit className="h-4 w-4" /> Produto Técnico-Tecnológico · v2.0
           </span>
           <h1 className="mt-6 text-4xl font-extrabold leading-tight sm:text-5xl">
-            IA-MIA GOV
+            IAMIA-GOV
           </h1>
           <p className="mt-4 text-lg text-primary-foreground/90 sm:text-xl">
             Instrumento de Avaliação da Maturidade Institucional em Inteligência Artificial

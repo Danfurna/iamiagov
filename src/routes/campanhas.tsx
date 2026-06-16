@@ -23,7 +23,7 @@ import { CAMPAIGN_STATUS } from "@/lib/assessment";
 export const Route = createFileRoute("/campanhas")({
   head: () => ({
     meta: [
-      { title: "Campanhas — IA-MIA GOV" },
+      { title: "Campanhas — IAMIA-GOV" },
       { name: "description", content: "Crie e gerencie campanhas de avaliação multirrespondente." },
     ],
   }),

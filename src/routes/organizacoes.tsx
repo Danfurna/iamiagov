@@ -19,7 +19,7 @@ import { ORG_TYPES } from "@/lib/assessment";
 export const Route = createFileRoute("/organizacoes")({
   head: () => ({
     meta: [
-      { title: "Organizações — IA-MIA GOV" },
+      { title: "Organizações — IAMIA-GOV" },
       { name: "description", content: "Cadastre e gerencie as organizações públicas avaliadas." },
     ],
   }),

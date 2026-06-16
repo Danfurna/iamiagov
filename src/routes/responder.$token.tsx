@@ -257,7 +257,7 @@ function Header({ campaignName }: { campaignName: string }) {
       <div className="mx-auto flex max-w-3xl items-center gap-2.5 px-4 py-4">
         <BrainCircuit className="h-6 w-6" />
         <div>
-          <p className="font-display font-bold leading-tight">IA-MIA GOV</p>
+          <p className="font-display font-bold leading-tight">IAMIA-GOV</p>
           <p className="text-xs text-primary-foreground/80">{campaignName}</p>
         </div>
       </div>

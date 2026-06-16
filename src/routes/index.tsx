@@ -22,13 +22,13 @@ export const Route = createFileRoute("/")({
 
 const MODULES = [
   { icon: Building2, title: "Administração", text: "Organizações, campanhas, respondentes e configurações." },
-  { icon: Users, title: "Coleta", text: "Questionário com 35 questões, evidências e salvamento automático." },
+  { icon: Users, title: "Coleta", text: "Instrumento com 35 afirmações, evidências e salvamento automático." },
   { icon: BarChart3, title: "Análise", text: "Maturidade, consenso institucional e benchmark interno." },
   { icon: FileText, title: "Relatórios", text: "Exportação em PDF, CSV e JSON com relatório executivo." },
 ];
 
 const FEATURES = [
-  { icon: Target, title: "Cálculo de maturidade", text: "Cinco níveis, da IA Ad hoc à IA Estratégica, com média simples ou ponderada." },
+  { icon: Target, title: "Cálculo de maturidade", text: "Cinco níveis, da Inicial (Ad hoc) à Estratégica, com média simples ou ponderada." },
   { icon: ShieldCheck, title: "Índice de consenso", text: "Mede o alinhamento institucional entre os respondentes a partir do desvio padrão." },
   { icon: GitCompare, title: "Benchmark interno", text: "Compare unidades, diretorias e perfis de respondentes." },
   { icon: Sparkles, title: "Simulador & plano de ação", text: "Simule cenários de evolução e gere recomendações automáticas." },
@@ -68,7 +68,7 @@ function Index() {
       <section className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
           { label: "Dimensões", value: DIMENSIONS.length },
-          { label: "Questões", value: 35 },
+          { label: "Afirmações", value: 35 },
           { label: "Organizações", value: orgs?.length ?? "—" },
           { label: "Campanhas", value: campaigns?.length ?? "—" },
         ].map((s) => (

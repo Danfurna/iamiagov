@@ -145,7 +145,7 @@ function Form({ respondentId, respondent, campaignName, onSubmitted }: {
   };
 
   const submit = async () => {
-    if (answered < TOTAL_QUESTIONS) { toast.error("Responda todas as 35 questões antes de enviar."); return; }
+    if (answered < TOTAL_QUESTIONS) { toast.error("Responda todas as 35 afirmações antes de enviar."); return; }
     await updateRespondent(respondentId, { submitted: true });
     setSubmitted(true);
     onSubmitted();
@@ -190,7 +190,7 @@ function Form({ respondentId, respondent, campaignName, onSubmitted }: {
         <div className="mb-6">
           <p className="text-sm font-medium text-accent">Dimensão {dim.index} de {DIMENSIONS.length}</p>
           <h2 className="text-2xl font-bold">{dim.name}</h2>
-          <p className="text-sm text-muted-foreground">{dimAnswered} de {dim.questions.length} questões respondidas</p>
+          <p className="text-sm text-muted-foreground">{dimAnswered} de {dim.questions.length} afirmações respondidas</p>
         </div>
 
         <div className="space-y-5">

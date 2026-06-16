@@ -26,11 +26,11 @@ export interface MaturityLevel {
 
 // Faixas baseadas no somatório das 35 questões (35 a 175).
 export const MATURITY_LEVELS: MaturityLevel[] = [
-  { level: 1, name: "IA Ad hoc", min: 35, max: 63, color: "#dc2626" },
-  { level: 2, name: "IA Exploratória", min: 64, max: 91, color: "#ca8a04" },
-  { level: 3, name: "IA Estruturada", min: 92, max: 119, color: "#2563eb" },
-  { level: 4, name: "IA Governada", min: 120, max: 147, color: "#1e3a8a" },
-  { level: 5, name: "IA Estratégica", min: 148, max: 175, color: "#16a34a" },
+  { level: 1, name: "(Inicial) Ad hoc", min: 35, max: 63, color: "#dc2626" },
+  { level: 2, name: "Exploratória", min: 64, max: 91, color: "#ca8a04" },
+  { level: 3, name: "Estruturada", min: 92, max: 119, color: "#2563eb" },
+  { level: 4, name: "Governada", min: 120, max: 147, color: "#1e3a8a" },
+  { level: 5, name: "Estratégica", min: 148, max: 175, color: "#16a34a" },
 ];
 
 export function levelFromTotalScore(total: number): MaturityLevel {

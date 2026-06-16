@@ -159,7 +159,7 @@ function Relatorio() {
             {/* Metodologia + Limitações */}
             <Block title="Metodologia">
               <p className="text-sm text-muted-foreground">
-                Avaliação baseada em 7 dimensões e 35 questões (escala Likert 1–5), respondida por
+                Avaliação baseada em 7 dimensões e 35 afirmações (escala Likert 1–5), respondida por
                 múltiplos participantes. Cálculo por {method === "weighted" ? "média ponderada" : "média simples"}.
                 O índice de consenso deriva do desvio padrão das respostas. Pontuação total entre 35 e 175 pontos,
                 distribuída em cinco níveis de maturidade.

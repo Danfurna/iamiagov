@@ -38,12 +38,12 @@ function Metodologia() {
             <div key={d.key} className="rounded-lg border p-4">
               <p className="text-xs text-muted-foreground">Dimensão {d.index}</p>
               <p className="font-medium">{d.name}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{d.questions.length} questões</p>
+              <p className="mt-1 text-xs text-muted-foreground">{d.questions.length} afirmações</p>
             </div>
           ))}
         </div>
         <p className="mt-3 text-sm">
-          São <strong>35 questões</strong> no total (5 por dimensão), respondidas por múltiplos
+          São <strong>35 afirmações</strong> no total (5 por dimensão), respondidas por múltiplos
           participantes da organização.
         </p>
       </Section>

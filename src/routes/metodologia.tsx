@@ -6,7 +6,7 @@ import { MATURITY_LEVELS } from "@/lib/analytics";
 export const Route = createFileRoute("/metodologia")({
   head: () => ({
     meta: [
-      { title: "Metodologia — IA-MIA GOV" },
+      { title: "Metodologia — IAMIA-GOV" },
       { name: "description", content: "Conceito de maturidade institucional em IA, sete dimensões, escala Likert, cálculo e índice de consenso." },
     ],
   }),

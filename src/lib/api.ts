@@ -1,4 +1,4 @@
-// Camada de acesso a dados (Lovable Cloud) para o IA-MIA GOV.
+// Camada de acesso a dados (Lovable Cloud) para o IAMIA-GOV.
 import { supabase } from "@/integrations/supabase/client";
 import { DIMENSIONS } from "./assessment";
 

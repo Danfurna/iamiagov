@@ -1,4 +1,4 @@
-// Modelo de avaliação IA-MIA GOV — 7 dimensões, 5 questões cada (35 questões).
+// Modelo de avaliação IAMIA-GOV — 7 dimensões, 5 questões cada (35 questões).
 
 export interface Question {
   key: string;

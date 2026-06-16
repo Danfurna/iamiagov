@@ -27,7 +27,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <BrainCircuit className="h-5 w-5" />
               </span>
               <span className="leading-tight">
-                <span className="block font-display text-lg font-bold text-primary">IA-MIA GOV</span>
+                <span className="block font-display text-lg font-bold text-primary">IAMIA-GOV</span>
                 <span className="block text-[10px] uppercase tracking-wider text-muted-foreground">
                   Maturidade em IA · Setor Público
                 </span>
@@ -83,7 +83,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {!isRespond && (
         <footer className="border-t bg-card print:hidden">
           <div className="mx-auto w-full max-w-7xl px-4 py-6 text-xs text-muted-foreground sm:px-6">
-            <p className="font-medium text-foreground">IA-MIA GOV — Instrumento de Avaliação da Maturidade Institucional em IA</p>
+            <p className="font-medium text-foreground">IAMIA-GOV — Instrumento de Avaliação da Maturidade Institucional em IA</p>
             <p className="mt-1">
               Produto Técnico-Tecnológico (PTT) de Mestrado Profissional em Administração Pública.
               Sem certificação oficial e sem promessas de conformidade regulatória.

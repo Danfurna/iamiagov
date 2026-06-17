@@ -31,7 +31,7 @@ const FEATURES = [
   { icon: Target, title: "Cálculo de maturidade", text: "Cinco níveis, da Inicial (Ad hoc) à Estratégica, com média simples ou ponderada." },
   { icon: ShieldCheck, title: "Índice de consenso", text: "Mede o alinhamento institucional entre os respondentes a partir do desvio padrão." },
   { icon: GitCompare, title: "Benchmark interno", text: "Compare unidades, diretorias e perfis de respondentes." },
-  { icon: Sparkles, title: "Simulador & plano de ação", text: "Simule cenários de evolução e gere recomendações automáticas." },
+  { icon: Sparkles, title: "Simulador e plano de ação", text: "Simule cenários de evolução e gere recomendações automáticas." },
 ];
 
 function Index() {

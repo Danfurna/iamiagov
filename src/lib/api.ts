@@ -31,6 +31,9 @@ export interface Respondent {
   organizational_unit: string | null;
   job_title: string | null;
   respondent_profile: string | null;
+  consent_accepted: boolean;
+  consented_at: string | null;
+  consent_version: string | null;
   submitted: boolean;
   created_at: string;
 }

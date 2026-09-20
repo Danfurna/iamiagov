@@ -21,6 +21,21 @@ export const SCALE_LABELS: Record<number, string> = {
   5: "Existe plenamente e é monitorado",
 };
 
+export const CONSENT_VERSION = "2026-09-20-v1";
+
+export const GLOSSARY = [
+  ["Iniciativas de IA", "Projetos, ações, experimentações ou outras atividades institucionais relacionadas ao desenvolvimento, adoção ou uso de IA."],
+  ["Soluções de IA", "Sistemas, aplicações, ferramentas ou serviços que utilizam Inteligência Artificial."],
+  ["Governança de IA", "Estruturas, responsabilidades e mecanismos utilizados para orientar, acompanhar e controlar o uso institucional de IA."],
+  ["Controle sobre os dados", "Conjunto de regras e mecanismos utilizados para definir e acompanhar como os dados podem ser acessados, utilizados, alterados e compartilhados no contexto das soluções de IA."],
+  ["Uso ético dos dados", "Utilização dos dados de forma compatível com sua finalidade institucional e com respeito aos direitos das pessoas, evitando usos indevidos ou discriminatórios."],
+  ["Viés em IA", "Tendência de uma solução de IA produzir resultados injustos, tendenciosos ou discriminatórios."],
+  ["Tratamento dos riscos", "Definição e adoção de medidas para responder aos riscos identificados, podendo envolver sua redução, prevenção, compartilhamento ou aceitação, conforme o caso."],
+  ["Supervisão humana", "Possibilidade de pessoas acompanharem, revisarem ou intervirem no uso ou nos resultados de soluções de IA."],
+  ["Responsabilização", "Dever de responder institucionalmente pelo uso de soluções de IA e por suas consequências."],
+  ["Força de trabalho", "Conjunto de servidores, empregados, colaboradores e demais profissionais que atuam na organização pública."],
+] as const;
+
 export const DIMENSIONS: Dimension[] = [
   {
     key: "estrategia",

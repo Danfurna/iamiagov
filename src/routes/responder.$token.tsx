@@ -144,7 +144,7 @@ function Questionnaire({ token, campaignName, initialRespondentId, campaignId }:
               <p>Responda com base na sua percepção sobre a organização como um todo, e não apenas sobre sua unidade de atuação.</p>
               <p>Não é necessário consultar documentos durante o preenchimento. Caso não tenha certeza sobre alguma afirmação, escolha a opção que mais se aproxima do que você conhece sobre a organização.</p>
               <p>Não há resposta certa ou errada. O objetivo não é avaliar pessoas, unidades ou áreas específicas, mas identificar o estágio de maturidade institucional da organização para o uso de Inteligência Artificial.</p>
-              <p>Alguns termos técnicos utilizados nas afirmações estão definidos no glossário, que poderá ser consultado a qualquer momento durante o preenchimento.</p>
+              <p>Alguns termos técnicos utilizados nas afirmações estão definidos no glossário, localizado no topo de cada página, que poderá ser consultado a qualquer momento durante o preenchimento.</p>
               <div className="pt-1">
                 <h3 className="font-display text-base font-semibold text-foreground">Escala de resposta</h3>
                 <ol className="mt-3 grid gap-2 sm:grid-cols-5">

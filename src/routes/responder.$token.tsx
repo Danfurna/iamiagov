@@ -1,10 +1,12 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { BrainCircuit, Check, ChevronLeft, ChevronRight, Loader2, Save } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { BrainCircuit, Check, ChevronLeft, ChevronRight, Clock3, Loader2, Save } from "lucide-react";
 import { toast } from "sonner";
+import { Glossary } from "@/components/Glossary";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,10 +19,22 @@ import {
   listResponsesForRespondent, upsertResponse, upsertEvidence, listEvidences,
   type Respondent,
 } from "@/lib/api";
-import { DIMENSIONS, RESPONDENT_PROFILES, SCALE_LABELS, TOTAL_QUESTIONS } from "@/lib/assessment";
+import {
+  CONSENT_VERSION, DIMENSIONS, RESPONDENT_PROFILES, SCALE_LABELS, TOTAL_QUESTIONS,
+} from "@/lib/assessment";
 
 export const Route = createFileRoute("/responder/$token")({
   validateSearch: (s: Record<string, unknown>): { r?: string } => ({ r: typeof s.r === "string" ? s.r : undefined }),
+  head: () => ({
+    meta: [
+      { title: "Responder avaliação — IAMIA-GOV" },
+      { name: "description", content: "Questionário de avaliação da maturidade institucional em Inteligência Artificial." },
+      { property: "og:title", content: "Responder avaliação — IAMIA-GOV" },
+      { property: "og:description", content: "Questionário de avaliação da maturidade institucional em Inteligência Artificial." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: RespondPage,
 });
 
@@ -48,9 +62,15 @@ function Questionnaire({ token, campaignName, initialRespondentId, campaignId }:
   const qc = useQueryClient();
   const [respondentId, setRespondentId] = useState<string | undefined>(initialRespondentId);
   const [identForm, setIdentForm] = useState({ name: "", email: "", organizational_unit: "", job_title: "", respondent_profile: "" });
+  const [consent, setConsent] = useState(false);
 
   const { data: existingResp } = useQuery({
-    queryKey: ["respondent", respondentId], queryFn: () => getRespondent(respondentId!), enabled: !!respondentId,
+    queryKey: ["respondent", respondentId],
+    queryFn: () => {
+      if (!respondentId) throw new Error("Respondente não identificado.");
+      return getRespondent(respondentId);
+    },
+    enabled: !!respondentId,
   });
 
   const startResp = useMutation({
@@ -58,36 +78,93 @@ function Questionnaire({ token, campaignName, initialRespondentId, campaignId }:
       campaign_id: campaignId, name: identForm.name.trim(), email: identForm.email || null,
       organizational_unit: identForm.organizational_unit || null, job_title: identForm.job_title || null,
       respondent_profile: identForm.respondent_profile || null,
+      consent_accepted: true,
+      consented_at: new Date().toISOString(),
+      consent_version: CONSENT_VERSION,
     }),
     onSuccess: (r) => setRespondentId(r.id),
-    onError: (e: Error) => toast.error(e.message),
+    onError: () => toast.error("Não foi possível salvar seus dados e o consentimento. Revise as informações e tente novamente."),
   });
+
+  const emailIsValid = !identForm.email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identForm.email);
+  const canStart = consent && !!identForm.name.trim() && !!identForm.respondent_profile && emailIsValid;
 
   if (!respondentId) {
     return (
       <div className="min-h-screen bg-background">
         <Header campaignName={campaignName} />
-        <div className="mx-auto max-w-lg px-4 py-10">
-          <Card className="shadow-elegant">
-            <CardHeader><CardTitle>Identificação do respondente</CardTitle></CardHeader>
+        <form
+          className="mx-auto max-w-3xl space-y-5 px-4 py-8 sm:py-10"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (canStart) startResp.mutate();
+          }}
+        >
+          <Card className="shadow-card">
+            <CardHeader><CardTitle><h1 className="text-xl">1. Sobre esta pesquisa</h1></CardTitle></CardHeader>
+            <CardContent className="space-y-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p>O IAMIA-GOV avalia a maturidade institucional da organização para o uso de Inteligência Artificial. Esta aplicação integra uma dissertação do Mestrado Profissional em Administração Pública da Universidade de Brasília.</p>
+              <p>A participação é voluntária e pode ser interrompida a qualquer momento. As respostas serão analisadas de forma agregada e tratadas de modo a não permitir a identificação individual dos participantes no relato dos resultados. As informações serão utilizadas exclusivamente para fins acadêmicos.</p>
+              <div className="flex items-start gap-3 rounded-md border bg-secondary/40 p-4">
+                <Checkbox
+                  id="research-consent"
+                  checked={consent}
+                  onCheckedChange={(checked) => setConsent(checked === true)}
+                  aria-required="true"
+                />
+                <Label htmlFor="research-consent" className="cursor-pointer leading-relaxed text-foreground">
+                  Li as informações apresentadas e concordo voluntariamente em participar da pesquisa.
+                </Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-card">
+            <CardHeader><CardTitle><h2 className="text-xl">2. Identificação do respondente</h2></CardTitle></CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">Preencha seus dados para iniciar a avaliação institucional.</p>
-              <Field label="Nome"><Input value={identForm.name} onChange={(e) => setIdentForm({ ...identForm, name: e.target.value })} maxLength={160} /></Field>
-              <Field label="E-mail institucional"><Input type="email" value={identForm.email} onChange={(e) => setIdentForm({ ...identForm, email: e.target.value })} maxLength={200} /></Field>
+              <p className="text-sm leading-relaxed text-muted-foreground">Preencha os dados abaixo para iniciar a avaliação institucional. Essas informações serão utilizadas apenas para caracterizar e organizar a participação na pesquisa e não serão apresentadas de forma individual nos resultados.</p>
+              <Field label="Nome"><Input required value={identForm.name} onChange={(e) => setIdentForm({ ...identForm, name: e.target.value })} maxLength={160} /></Field>
+              <Field label="E-mail institucional"><Input type="email" value={identForm.email} onChange={(e) => setIdentForm({ ...identForm, email: e.target.value })} maxLength={200} aria-invalid={!emailIsValid} /></Field>
+              {!emailIsValid && <p role="alert" className="text-sm text-destructive">Informe um e-mail válido.</p>}
               <Field label="Unidade organizacional"><Input value={identForm.organizational_unit} onChange={(e) => setIdentForm({ ...identForm, organizational_unit: e.target.value })} maxLength={160} placeholder="Ex.: Diretoria de TI" /></Field>
               <Field label="Cargo"><Input value={identForm.job_title} onChange={(e) => setIdentForm({ ...identForm, job_title: e.target.value })} maxLength={120} /></Field>
               <Field label="Perfil">
-                <Select value={identForm.respondent_profile} onValueChange={(v) => setIdentForm({ ...identForm, respondent_profile: v })}>
-                  <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <Select required value={identForm.respondent_profile} onValueChange={(v) => setIdentForm({ ...identForm, respondent_profile: v })}>
+                  <SelectTrigger aria-label="Perfil"><SelectValue placeholder="Selecione" /></SelectTrigger>
                   <SelectContent>{RESPONDENT_PROFILES.map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}</SelectContent>
                 </Select>
               </Field>
-              <Button className="w-full" disabled={!identForm.name.trim() || startResp.isPending} onClick={() => startResp.mutate()}>
-                Iniciar avaliação
-              </Button>
             </CardContent>
           </Card>
-        </div>
+
+          <Card className="shadow-card">
+            <CardHeader><CardTitle><h2 className="text-xl">3. Como responder</h2></CardTitle></CardHeader>
+            <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p className="flex items-center gap-2 font-medium text-foreground"><Clock3 className="h-4 w-4" /> O instrumento contém 35 afirmações, distribuídas em sete dimensões. O preenchimento leva aproximadamente 15 minutos.</p>
+              <p>Responda com base na sua percepção sobre a organização como um todo, e não apenas sobre sua unidade de atuação.</p>
+              <p>Não é necessário consultar documentos durante o preenchimento. Caso não tenha certeza sobre alguma afirmação, escolha a opção que mais se aproxima do que você conhece sobre a organização.</p>
+              <p>Não há resposta certa ou errada. O objetivo não é avaliar pessoas, unidades ou áreas específicas, mas identificar o estágio de maturidade institucional da organização para o uso de Inteligência Artificial.</p>
+              <p>Alguns termos técnicos utilizados nas afirmações estão definidos no glossário, que poderá ser consultado a qualquer momento durante o preenchimento.</p>
+              <div className="pt-1">
+                <h3 className="font-display text-base font-semibold text-foreground">Escala de resposta</h3>
+                <ol className="mt-3 grid gap-2 sm:grid-cols-5">
+                  {[1, 2, 3, 4, 5].map((value) => (
+                    <li key={value} className="rounded-md border bg-muted/40 p-3">
+                      <span className="block font-display text-lg font-bold text-primary">{value}</span>
+                      <span className="text-xs leading-relaxed text-foreground">{SCALE_LABELS[value]}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <p className="rounded-md border-l-4 border-primary bg-secondary/40 p-4 text-foreground">Se a organização ainda não utiliza soluções de IA, avalie cada afirmação considerando as práticas, capacidades e estruturas institucionais atualmente existentes ou em preparação.</p>
+            </CardContent>
+          </Card>
+
+          <Button type="submit" size="lg" className="w-full" disabled={!canStart || startResp.isPending}>
+            {startResp.isPending && <Loader2 className="animate-spin" />}
+            Iniciar avaliação
+          </Button>
+        </form>
       </div>
     );
   }
@@ -254,12 +331,15 @@ function Form({ respondentId, respondent, campaignName, onSubmitted }: {
 function Header({ campaignName }: { campaignName: string }) {
   return (
     <header className="border-b bg-hero text-primary-foreground">
-      <div className="mx-auto flex max-w-3xl items-center gap-2.5 px-4 py-4">
-        <BrainCircuit className="h-6 w-6" />
-        <div>
-          <p className="font-display font-bold leading-tight">IAMIA-GOV</p>
-          <p className="text-xs text-primary-foreground/80">{campaignName}</p>
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-4">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <BrainCircuit className="h-6 w-6 shrink-0" />
+          <div className="min-w-0">
+            <p className="font-display font-bold leading-tight">IAMIA-GOV</p>
+            <p className="truncate text-xs text-primary-foreground/80">{campaignName}</p>
+          </div>
         </div>
+        <Glossary />
       </div>
     </header>
   );

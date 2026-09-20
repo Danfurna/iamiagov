@@ -158,6 +158,9 @@ export type Database = {
       respondents: {
         Row: {
           campaign_id: string
+          consent_accepted: boolean
+          consent_version: string | null
+          consented_at: string | null
           created_at: string
           email: string | null
           id: string
@@ -169,6 +172,9 @@ export type Database = {
         }
         Insert: {
           campaign_id: string
+          consent_accepted?: boolean
+          consent_version?: string | null
+          consented_at?: string | null
           created_at?: string
           email?: string | null
           id?: string
@@ -180,6 +186,9 @@ export type Database = {
         }
         Update: {
           campaign_id?: string
+          consent_accepted?: boolean
+          consent_version?: string | null
+          consented_at?: string | null
           created_at?: string
           email?: string | null
           id?: string

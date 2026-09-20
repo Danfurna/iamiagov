@@ -52,11 +52,12 @@ export function buildRawRows(
   responses: ResponseRow[],
 ): Record<string, string | number>[] {
   const byId = new Map(respondents.map((r) => [r.id, r]));
+  const anonymousCodeById = new Map(respondents.map((r, index) => [r.id, `Participante ${index + 1}`]));
   return responses.map((r) => {
     const resp = byId.get(r.respondent_id);
     const dim = DIMENSIONS.find((d) => d.key === r.dimension_key);
     return {
-      Respondente: resp?.name ?? "",
+      Respondente: anonymousCodeById.get(r.respondent_id) ?? "Participante",
       Perfil: resp?.respondent_profile ?? "",
       Unidade: resp?.organizational_unit ?? "",
       Dimensao: dim?.name ?? r.dimension_key,

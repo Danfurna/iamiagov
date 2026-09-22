@@ -273,9 +273,9 @@ function Questionnaire({
                     </strong>
                   </span>
                   <span className="mt-4 block">
-                    Utilize a escala apresentada abaixo, em que 1 significa que a prática, capacidade ou estrutura descrita
-                    não existe na organização e 5 significa que ela existe plenamente e é monitorada. Os valores
-                    intermediários representam diferentes níveis de desenvolvimento e institucionalização.
+                    Utilize a escala apresentada abaixo, em que 1 significa que a prática, capacidade ou estrutura
+                    descrita não existe na organização e 5 significa que ela existe plenamente e é monitorada. Os
+                    valores intermediários representam diferentes níveis de desenvolvimento e institucionalização.
                   </span>
                   <span className="mt-4 block">O preenchimento leva aproximadamente 15 minutos.</span>
                 </p>
@@ -309,8 +309,9 @@ function Questionnaire({
                 </ol>
               </div>
               <p className="rounded-md border-l-4 border-primary bg-secondary/40 p-4 text-foreground">
-                Se a organização pública ainda não utiliza soluções de IA, avalie cada afirmação considerando as
-                práticas, capacidades e estruturas institucionais atualmente existentes ou em preparação.
+                Mesmo que a organização pública ainda não utilize soluções de IA, responda a todas as afirmações
+                utilizando a escala de 1 a 5 considerando as práticas, capacidades e estruturas institucionais
+                atualmente existentes ou em preparação.
               </p>
             </CardContent>
           </Card>

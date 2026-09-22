@@ -267,7 +267,7 @@ function Questionnaire({
                 <p>
                   <span className="block">
                     O instrumento contém 35 afirmações, distribuídas em sete dimensões.
-                    <strong className="mt-2 block font-bold text-primary">
+                    <strong className="mt-2 block font-bold text-destructive">
                       Para cada afirmação, selecione uma opção de 1 a 5, de acordo com o quanto a situação descrita
                       representa a realidade atual da organização pública.
                     </strong>

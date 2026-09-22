@@ -376,6 +376,9 @@ function Form({
   useEffect(() => {
     if (savedEvidences) setEvidence(Object.fromEntries(savedEvidences.map((e) => [e.dimension_key, e.evidence_text])));
   }, [savedEvidences]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [step]);
 
   const answered = Object.keys(scores).length;
   const progress = (answered / TOTAL_QUESTIONS) * 100;

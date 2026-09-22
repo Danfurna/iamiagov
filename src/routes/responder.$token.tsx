@@ -266,9 +266,11 @@ function Questionnaire({
                 <Clock3 className="mt-1 h-4 w-4 shrink-0" />
                 <p>
                   <span className="block">
-                    O instrumento contém 35 afirmações, distribuídas em sete dimensões. Para cada afirmação, selecione uma
-                    opção de 1 a 5, de acordo com o quanto a situação descrita representa a realidade atual da organização
-                    pública.
+                    O instrumento contém 35 afirmações, distribuídas em sete dimensões.
+                    <strong className="mt-2 block font-bold text-primary">
+                      Para cada afirmação, selecione uma opção de 1 a 5, de acordo com o quanto a situação descrita
+                      representa a realidade atual da organização pública.
+                    </strong>
                   </span>
                   <span className="mt-4 block">
                     Utilize a escala apresentada abaixo, em que 1 significa que a prática, capacidade ou estrutura descrita

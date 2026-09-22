@@ -104,6 +104,7 @@ function Questionnaire({
 }) {
   const qc = useQueryClient();
   const [respondentId, setRespondentId] = useState<string | undefined>(initialRespondentId);
+  const hadRespondentId = useRef(Boolean(initialRespondentId));
   const [identForm, setIdentForm] = useState({
     name: "",
     email: "",
@@ -112,6 +113,13 @@ function Questionnaire({
     respondent_profile: "",
   });
   const [consent, setConsent] = useState(false);
+
+  useEffect(() => {
+    if (respondentId && !hadRespondentId.current) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      hadRespondentId.current = true;
+    }
+  }, [respondentId]);
 
   const { data: existingResp } = useQuery({
     queryKey: ["respondent", respondentId],

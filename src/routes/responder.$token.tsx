@@ -262,18 +262,22 @@ function Questionnaire({
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              <p className="flex items-center gap-2 font-medium text-foreground">
-                <Clock3 className="h-4 w-4" /> O instrumento contém 35 afirmações, distribuídas em sete dimensões. Para
-                cada afirmação, selecione uma opção de 1 a 5, de acordo com o quanto a situação descrita representa a
-                realidade atual da organização pública. Utilize a escala apresentada abaixo, em que 1 significa que a
-                prática, capacidade ou estrutura descrita não existe na organização pública.
-                <br />
-                Utilize a escala apresentada abaixo, em que 1 significa que a prática, capacidade ou estrutura descrita
-                não existe na organização e 5 significa que ela existe plenamente e é monitorada. Os valores intermediários
-                representam diferentes níveis de desenvolvimento e institucionalização.
-                <br />
-                O preenchimento leva aproximadamente 15 minutos.
-              </p>
+              <div className="flex items-start gap-2 font-medium text-foreground">
+                <Clock3 className="mt-1 h-4 w-4 shrink-0" />
+                <p>
+                  <span className="block">
+                    O instrumento contém 35 afirmações, distribuídas em sete dimensões. Para cada afirmação, selecione uma
+                    opção de 1 a 5, de acordo com o quanto a situação descrita representa a realidade atual da organização
+                    pública.
+                  </span>
+                  <span className="mt-4 block">
+                    Utilize a escala apresentada abaixo, em que 1 significa que a prática, capacidade ou estrutura descrita
+                    não existe na organização e 5 significa que ela existe plenamente e é monitorada. Os valores
+                    intermediários representam diferentes níveis de desenvolvimento e institucionalização.
+                  </span>
+                  <span className="mt-4 block">O preenchimento leva aproximadamente 15 minutos.</span>
+                </p>
+              </div>
               <p>
                 Responda com base na sua percepção sobre a organização pública como um todo, e não apenas sobre sua
                 unidade de atuação.

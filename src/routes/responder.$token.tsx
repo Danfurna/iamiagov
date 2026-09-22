@@ -263,8 +263,12 @@ function Questionnaire({
             </CardHeader>
             <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
               <p className="flex items-center gap-2 font-medium text-foreground">
-                <Clock3 className="h-4 w-4" /> O instrumento contém 35 afirmações, distribuídas em sete dimensões. O
-                preenchimento leva aproximadamente 15 minutos.
+                <Clock3 className="h-4 w-4" /> O instrumento contém 35 afirmações, distribuídas em sete dimensões. Para
+                cada afirmação, selecione uma opção de 1 a 5, de acordo com o quanto a situação descrita representa a
+                realidade atual da organização pública. Utilize a escala apresentada abaixo, em que 1 significa que a
+                prática, capacidade ou estrutura descrita não existe na organização e 5 significa que ela existe
+                plenamente e é monitorada. Os valores intermediários representam diferentes níveis de desenvolvimento e
+                institucionalização. O preenchimento leva aproximadamente 15 minutos.
               </p>
               <p>
                 Responda com base na sua percepção sobre a organização pública como um todo, e não apenas sobre sua
@@ -284,7 +288,7 @@ function Questionnaire({
                 cada página, que poderá ser consultado a qualquer momento durante o preenchimento.
               </p>
               <div className="pt-1">
-                <h3 className="font-display text-base font-semibold text-foreground">Escala de resposta</h3>
+                <h3 className="font-display text-base font-semibold text-foreground">Como avaliar cada afirmação</h3>
                 <ol className="mt-3 grid gap-2 sm:grid-cols-5">
                   {[1, 2, 3, 4, 5].map((value) => (
                     <li key={value} className="rounded-md border bg-muted/40 p-3">

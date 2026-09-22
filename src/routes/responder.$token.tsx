@@ -438,6 +438,11 @@ function Form({
   }
 
   const dimAnswered = dim.questions.filter((q) => scores[q.key] != null).length;
+  const isCurrentDimensionComplete = dimAnswered === dim.questions.length;
+  const canOpenDimension = (targetIndex: number) =>
+    DIMENSIONS.slice(0, targetIndex).every((dimension) =>
+      dimension.questions.every((question) => scores[question.key] != null),
+    );
 
   return (
     <div className="min-h-screen bg-background pb-28">
@@ -531,14 +536,18 @@ function Form({
             {DIMENSIONS.map((d, i) => (
               <button
                 key={d.key}
-                onClick={() => setStep(i)}
-                className={`h-2 w-2 rounded-full ${i === step ? "bg-primary" : d.questions.every((q) => scores[q.key] != null) ? "bg-success" : "bg-muted"}`}
+                type="button"
+                disabled={!canOpenDimension(i)}
+                onClick={() => {
+                  if (canOpenDimension(i)) setStep(i);
+                }}
+                className={`h-2 w-2 rounded-full disabled:cursor-not-allowed ${i === step ? "bg-primary" : d.questions.every((q) => scores[q.key] != null) ? "bg-success" : "bg-muted"}`}
                 aria-label={d.name}
               />
             ))}
           </div>
           {step < DIMENSIONS.length - 1 ? (
-            <Button onClick={() => setStep((s) => s + 1)}>
+            <Button disabled={!isCurrentDimensionComplete} onClick={() => setStep((s) => s + 1)}>
               Próxima <ChevronRight className="h-4 w-4" />
             </Button>
           ) : (

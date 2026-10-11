@@ -25,6 +25,10 @@ export const Route = createFileRoute("/campanhas")({
     meta: [
       { title: "Campanhas — IAMIA-GOV" },
       { name: "description", content: "Crie e gerencie campanhas de avaliação multirrespondente." },
+      { property: "og:title", content: "Campanhas — IAMIA-GOV" },
+      { property: "og:description", content: "Crie e gerencie campanhas de avaliação multirrespondente." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: CampanhasPage,

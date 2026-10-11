@@ -15,6 +15,10 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "IAMIA-GOV — Maturidade Institucional em IA" },
       { name: "description", content: "Avalie a capacidade da sua organização pública de planejar, implementar e governar Inteligência Artificial de forma responsável." },
+      { property: "og:title", content: "IAMIA-GOV — Maturidade Institucional em IA" },
+      { property: "og:description", content: "Avalie a capacidade da sua organização pública de planejar, implementar e governar Inteligência Artificial de forma responsável." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,

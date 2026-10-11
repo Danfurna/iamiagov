@@ -21,6 +21,10 @@ export const Route = createFileRoute("/organizacoes")({
     meta: [
       { title: "Organizações — IAMIA-GOV" },
       { name: "description", content: "Cadastre e gerencie as organizações públicas avaliadas." },
+      { property: "og:title", content: "Organizações — IAMIA-GOV" },
+      { property: "og:description", content: "Cadastre e gerencie as organizações públicas avaliadas." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: OrganizacoesPage,

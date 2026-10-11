@@ -1,6 +1,7 @@
 // Camada de acesso a dados (Lovable Cloud) para o IAMIA-GOV.
 import { supabase } from "@/integrations/supabase/client";
 import { DIMENSIONS } from "./assessment";
+import { fetchAllPages } from "./pagination";
 
 export interface Organization {
   id: string;
@@ -111,12 +112,15 @@ export async function deleteCampaign(id: string) {
 
 // ---- Respondents ----
 export async function listRespondents(campaignId: string): Promise<Respondent[]> {
-  const { data, error } = await supabase
-    .from("respondents")
-    .select("*")
-    .eq("campaign_id", campaignId)
-    .order("created_at", { ascending: true });
-  if (error) throw error;
+  const data = await fetchAllPages((from, to) =>
+    supabase
+      .from("respondents")
+      .select("*")
+      .eq("campaign_id", campaignId)
+      .order("created_at", { ascending: true })
+      .order("id", { ascending: true })
+      .range(from, to),
+  );
   return data as Respondent[];
 }
 
@@ -148,11 +152,14 @@ export async function listResponsesForCampaign(campaignId: string): Promise<Resp
   const respondents = await listRespondents(campaignId);
   const ids = respondents.filter((r) => r.submitted).map((r) => r.id);
   if (ids.length === 0) return [];
-  const { data, error } = await supabase
-    .from("responses")
-    .select("respondent_id,dimension_key,question_key,score")
-    .in("respondent_id", ids);
-  if (error) throw error;
+  const data = await fetchAllPages((from, to) =>
+    supabase
+      .from("responses")
+      .select("respondent_id,dimension_key,question_key,score")
+      .in("respondent_id", ids)
+      .order("id", { ascending: true })
+      .range(from, to),
+  );
   return data as ResponseRow[];
 }
 

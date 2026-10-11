@@ -26,6 +26,16 @@ import { CampaignAnalysis } from "@/components/CampaignAnalysis";
 import { statusBadge } from "./campanhas";
 
 export const Route = createFileRoute("/campanha/$campaignId")({
+  head: () => ({
+    meta: [
+      { title: "Análise da campanha — IAMIA-GOV" },
+      { name: "description", content: "Respondentes, indicadores e exportações da campanha de maturidade institucional em IA." },
+      { property: "og:title", content: "Análise da campanha — IAMIA-GOV" },
+      { property: "og:description", content: "Respondentes, indicadores e exportações da campanha de maturidade institucional em IA." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: CampaignDetail,
 });
 

@@ -9,34 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as CampanhasRouteImport } from './routes/campanhas'
-import { Route as MetodologiaRouteImport } from './routes/metodologia'
-import { Route as OrganizacoesRouteImport } from './routes/organizacoes'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as CampanhaCampaignIdRouteImport } from './routes/campanha.$campaignId'
-import { Route as RelatorioCampaignIdRouteImport } from './routes/relatorio.$campaignId'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as OrganizacoesRouteImport } from './routes/organizacoes'
+import { Route as MetodologiaRouteImport } from './routes/metodologia'
+import { Route as CampanhasRouteImport } from './routes/campanhas'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResponderTokenRouteImport } from './routes/responder.$token'
+import { Route as RelatorioCampaignIdRouteImport } from './routes/relatorio.$campaignId'
+import { Route as CampanhaCampaignIdRouteImport } from './routes/campanha.$campaignId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CampanhasRoute = CampanhasRouteImport.update({
-  id: '/campanhas',
-  path: '/campanhas',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MetodologiaRoute = MetodologiaRouteImport.update({
-  id: '/metodologia',
-  path: '/metodologia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OrganizacoesRoute = OrganizacoesRouteImport.update({
-  id: '/organizacoes',
-  path: '/organizacoes',
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -44,14 +29,29 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SobreRoute = SobreRouteImport.update({
-  id: '/sobre',
-  path: '/sobre',
+const OrganizacoesRoute = OrganizacoesRouteImport.update({
+  id: '/organizacoes',
+  path: '/organizacoes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CampanhaCampaignIdRoute = CampanhaCampaignIdRouteImport.update({
-  id: '/campanha/$campaignId',
-  path: '/campanha/$campaignId',
+const MetodologiaRoute = MetodologiaRouteImport.update({
+  id: '/metodologia',
+  path: '/metodologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampanhasRoute = CampanhasRouteImport.update({
+  id: '/campanhas',
+  path: '/campanhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResponderTokenRoute = ResponderTokenRouteImport.update({
+  id: '/responder/$token',
+  path: '/responder/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RelatorioCampaignIdRoute = RelatorioCampaignIdRouteImport.update({
@@ -59,9 +59,9 @@ const RelatorioCampaignIdRoute = RelatorioCampaignIdRouteImport.update({
   path: '/relatorio/$campaignId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResponderTokenRoute = ResponderTokenRouteImport.update({
-  id: '/responder/$token',
-  path: '/responder/$token',
+const CampanhaCampaignIdRoute = CampanhaCampaignIdRouteImport.update({
+  id: '/campanha/$campaignId',
+  path: '/campanha/$campaignId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -149,32 +149,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/campanhas': {
-      id: '/campanhas'
-      path: '/campanhas'
-      fullPath: '/campanhas'
-      preLoaderRoute: typeof CampanhasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/metodologia': {
-      id: '/metodologia'
-      path: '/metodologia'
-      fullPath: '/metodologia'
-      preLoaderRoute: typeof MetodologiaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/organizacoes': {
-      id: '/organizacoes'
-      path: '/organizacoes'
-      fullPath: '/organizacoes'
-      preLoaderRoute: typeof OrganizacoesRouteImport
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -184,18 +163,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sobre': {
-      id: '/sobre'
-      path: '/sobre'
-      fullPath: '/sobre'
-      preLoaderRoute: typeof SobreRouteImport
+    '/organizacoes': {
+      id: '/organizacoes'
+      path: '/organizacoes'
+      fullPath: '/organizacoes'
+      preLoaderRoute: typeof OrganizacoesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/campanha/$campaignId': {
-      id: '/campanha/$campaignId'
-      path: '/campanha/$campaignId'
-      fullPath: '/campanha/$campaignId'
-      preLoaderRoute: typeof CampanhaCampaignIdRouteImport
+    '/metodologia': {
+      id: '/metodologia'
+      path: '/metodologia'
+      fullPath: '/metodologia'
+      preLoaderRoute: typeof MetodologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campanhas': {
+      id: '/campanhas'
+      path: '/campanhas'
+      fullPath: '/campanhas'
+      preLoaderRoute: typeof CampanhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/responder/$token': {
+      id: '/responder/$token'
+      path: '/responder/$token'
+      fullPath: '/responder/$token'
+      preLoaderRoute: typeof ResponderTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/relatorio/$campaignId': {
@@ -205,11 +205,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RelatorioCampaignIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/responder/$token': {
-      id: '/responder/$token'
-      path: '/responder/$token'
-      fullPath: '/responder/$token'
-      preLoaderRoute: typeof ResponderTokenRouteImport
+    '/campanha/$campaignId': {
+      id: '/campanha/$campaignId'
+      path: '/campanha/$campaignId'
+      fullPath: '/campanha/$campaignId'
+      preLoaderRoute: typeof CampanhaCampaignIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

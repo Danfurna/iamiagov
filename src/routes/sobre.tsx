@@ -8,6 +8,10 @@ export const Route = createFileRoute("/sobre")({
     meta: [
       { title: "Sobre — IAMIA-GOV" },
       { name: "description", content: "Sobre o IAMIA-GOV, Produto Técnico-Tecnológico de Mestrado Profissional em Administração Pública." },
+      { property: "og:title", content: "Sobre — IAMIA-GOV" },
+      { property: "og:description", content: "Sobre o IAMIA-GOV, Produto Técnico-Tecnológico de Mestrado Profissional em Administração Pública." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Sobre,

@@ -14,6 +14,16 @@ import {
 } from "@/lib/analytics";
 
 export const Route = createFileRoute("/relatorio/$campaignId")({
+  head: () => ({
+    meta: [
+      { title: "Relatório executivo — IAMIA-GOV" },
+      { name: "description", content: "Relatório acadêmico de maturidade institucional em IA, dimensões, consenso e recomendações." },
+      { property: "og:title", content: "Relatório executivo — IAMIA-GOV" },
+      { property: "og:description", content: "Relatório acadêmico de maturidade institucional em IA, dimensões, consenso e recomendações." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: Relatorio,
 });
 

@@ -8,6 +8,10 @@ export const Route = createFileRoute("/metodologia")({
     meta: [
       { title: "Metodologia — IAMIA-GOV" },
       { name: "description", content: "Conceito de maturidade institucional em IA, sete dimensões, escala Likert, cálculo e índice de consenso." },
+      { property: "og:title", content: "Metodologia — IAMIA-GOV" },
+      { property: "og:description", content: "Conceito de maturidade institucional em IA, sete dimensões, escala Likert, cálculo e índice de consenso." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Metodologia,

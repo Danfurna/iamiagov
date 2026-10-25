@@ -34,10 +34,33 @@ export const MATURITY_LEVELS: MaturityLevel[] = [
 ];
 
 export function levelFromTotalScore(total: number): MaturityLevel {
-  for (const lvl of MATURITY_LEVELS) {
-    if (total >= lvl.min && total <= lvl.max) return lvl;
+  // Eight scaled machine epsilons absorb arithmetic noise from summing seven
+  // dimension means. This is not decimal rounding: meaningful offsets remain.
+  const toleranceAt = (boundary: number) =>
+    8 * Number.EPSILON * Math.max(Math.abs(total), Math.abs(boundary));
+  const minimum = 35;
+  const maximum = 175;
+  if (
+    !Number.isFinite(total) ||
+    total < minimum - toleranceAt(minimum) ||
+    total > maximum + toleranceAt(maximum)
+  ) {
+    // Preserve a renderable result for empty assessments (total = 0), without
+    // silently assigning a maturity level to invalid input.
+    return {
+      level: 0,
+      name: "Pontuação inválida",
+      min: minimum,
+      max: maximum,
+      color: MATURITY_LEVELS[0].color,
+    };
   }
-  return total < 35 ? MATURITY_LEVELS[0] : MATURITY_LEVELS[MATURITY_LEVELS.length - 1];
+  // Continuous intervals: each upper bound is inclusive; the next interval
+  // starts immediately above it. Ignore integer-only lower-bound metadata.
+  for (const lvl of MATURITY_LEVELS) {
+    if (total <= lvl.max + toleranceAt(lvl.max)) return lvl;
+  }
+  throw new RangeError("Intervalos de maturidade inconsistentes.");
 }
 
 // Converte média (1..5) por dimensão em total equivalente (35..175) usando o método.

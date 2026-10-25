@@ -1,6 +1,11 @@
-import { describe, expect, test } from "bun:test";
+import { describe, it as test } from "node:test";
+import { strictEqual } from "node:assert";
 import { levelFromTotalScore, totalScoreFromDimensionAverages } from "./analytics";
 import { DIMENSIONS } from "./assessment";
+
+const expect = (actual: unknown) => ({
+  toBe: (expected: unknown) => strictEqual(actual, expected),
+});
 
 describe("maturity classification — audit cases", () => {
   const cases = [

@@ -7,6 +7,6 @@
 
 # Classificação contínua da maturidade
 
-- [ ] Corrigir exclusivamente o classificador, com tolerância numérica nas fronteiras e estado explícito para pontuação inválida.
-- [ ] Executar os 14 casos da auditoria e testes de fronteira, precisão e entradas inválidas.
-- [ ] Recalcular a CAPES e conferir o painel, sem alterar dados ou fórmulas.
+- [x] Corrigir exclusivamente o classificador, com tolerância numérica nas fronteiras e estado explícito para pontuação inválida.
+- [x] Executar os 14 casos da auditoria e testes de fronteira, precisão e entradas inválidas: 39 testes aprovados.
+- [x] Recalcular a CAPES sobre 1.014 respostas e conferir o painel: indicadores preservados; Riscos N2 e Transparência N1 no classificador.
